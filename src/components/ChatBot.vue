@@ -90,6 +90,11 @@
         {{ t('chat.send') }}
       </button>
     </div>
+
+    <footer class="chatbot-footer">
+      <span>{{ t('footer.madeBy') }}</span>
+      <a :href="t('footer.authorGithub')" target="_blank">{{ t('footer.authorName') }}</a>
+    </footer>
   </div>
 </template>
 
@@ -767,5 +772,35 @@ const sendMessage = async () => {
     letter-spacing: 0;
     text-transform: none;
   }
+
+  .chatbot-footer {
+    padding: 0.5rem;
+  }
+
+  .chatbot-footer a {
+    font-size: 0.75rem;
+  }
+}
+
+.chatbot-footer {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  text-align: center;
+  border-top: 2px solid rgba(255, 66, 89, 1);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 20px rgba(255, 66, 89, 0.3);
+}
+
+.chatbot-footer a {
+  color: #84e100;
+  text-decoration: none;
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.chatbot-footer a:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
 }
 </style>

@@ -1,4 +1,9 @@
 export default {
+  footer: {
+    madeBy: 'Créé par',
+    authorName: 'cmnemoi',
+    authorGithub: 'https://github.com/cmnemoi',
+  },
   header: {
     title: 'Ask NERON',
     disclaimer: 'NERON est basé sur un',
