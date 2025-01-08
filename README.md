@@ -1,64 +1,66 @@
-# ask-neron-app
+# Ask Neron App
 
-This template should help get you started developing with Vue 3 in Vite.
+A Vue.js frontend application for interacting with NERON, an LLM-based chatbot. Built with Vue 3, TypeScript, and following a basic Ports & Adapters architecture pattern.
 
-## Recommended IDE Setup
+## Quick Start
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+1. Install dependencies:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+2. Start the development server:
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+The application will be available at `http://localhost:5173`
+
+## Features
+
+- Interactive chat interface with NERON (Retrieved-Augmented LLM)
+- Real-time message updates
+
+## Development
+
+### Prerequisites
+
+- Node.js (latest LTS version recommended)
+- npm
+
+### Available Commands
 
 ```sh
+# Start development server with hot-reload
+npm run dev
+
+# Build for production
 npm run build
-```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+# Preview production build
+npm run preview
 
-```sh
+# Run unit tests
 npm run test:unit
-```
+# or
+make test
 
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
+# Type checking
+npm run type-check
 
-```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-npm run build
-
-# Runs the end-to-end tests
-npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
+# Lint and fix files
 npm run lint
+
+# Format code
+npm run format
 ```
+
+## Architecture
+
+The project follows a Ports & Adapters (Hexagonal) architecture:
+
+- `src/components/ports/` - Contains the interfaces defining the application boundaries
+- `src/components/adapters/` - Implements the interfaces for different contexts (API, In-Memory)
+- `src/components/services/` - Core business logic implementation
