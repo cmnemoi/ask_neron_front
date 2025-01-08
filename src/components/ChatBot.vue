@@ -496,8 +496,6 @@ const sendMessage = async () => {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   position: relative;
   overflow: hidden;
 }
@@ -600,10 +598,172 @@ const sendMessage = async () => {
     height: 100vh;
     width: 100vw;
     max-width: none;
+    margin: 0;
+  }
+
+  .chatbot-header {
+    padding: 3.5rem 0.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .chatbot-header h1 {
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+  }
+
+  .disclaimer {
+    font-size: 0.7rem;
+    padding: 0 1rem;
+    line-height: 1.3;
+  }
+
+  .github-links {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    width: fit-content;
+    align-self: center;
+  }
+
+  .github-link {
+    padding: 0.3rem 0.6rem;
+  }
+
+  .github-link span {
+    font-size: 0.8rem;
+  }
+
+  .github-logo {
+    width: 18px;
+    height: 18px;
+  }
+
+  .language-selector {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    gap: 0.3rem;
+  }
+
+  .lang-selector {
+    width: 24px;
+    height: 24px;
+  }
+
+  .lang-selector {
+    width: 28px;
+    height: 28px;
   }
 
   .message {
-    max-width: 90%;
+    max-width: 95%;
+    gap: 0.5rem;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .message-content {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .documents-header {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .document {
+    padding: 0.75rem;
+  }
+
+  .document h3 {
+    font-size: 0.85rem;
+  }
+
+  .source-link {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .chat-input {
+    padding: 0.8rem;
+    gap: 0.5rem;
+  }
+
+  .chat-input input {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .chat-input button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Fix for mobile keyboard pushing content */
+  @supports (-webkit-touch-callout: none) {
+    .chat-messages {
+      height: calc(100vh - 180px);
+    }
+  }
+}
+
+/* Additional breakpoint for very small devices */
+@media (max-width: 380px) {
+  .chatbot-header {
+    padding: 3rem 0.5rem 3.5rem;
+  }
+
+  .chatbot-header h1 {
+    font-size: 1.1rem;
+  }
+
+  .disclaimer {
+    font-size: 0.65rem;
+  }
+
+  .github-link {
+    padding: 0.3rem;
+  }
+
+  .github-link span {
+    font-size: 0.75rem;
+  }
+
+  .message {
+    max-width: 100%;
+  }
+
+  .chat-input {
+    padding: 0.4rem;
+    gap: 0.3rem;
+  }
+
+  .chat-input input {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .chat-input button {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    min-width: 60px;
+    letter-spacing: 0;
+    text-transform: none;
   }
 }
 </style>
