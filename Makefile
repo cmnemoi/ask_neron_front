@@ -1,4 +1,4 @@
 .PHONY: test
 
 test:
-	npm run test:unit
+	npm run test:ci

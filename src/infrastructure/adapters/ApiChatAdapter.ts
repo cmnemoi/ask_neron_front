@@ -1,4 +1,4 @@
-import type { ChatPort, Message } from '../ports/ChatPort'
+import type { ChatPort, Message } from '../../core/ports/ChatPort'
 import axios from 'axios'
 
 export class ApiChatAdapter implements ChatPort {

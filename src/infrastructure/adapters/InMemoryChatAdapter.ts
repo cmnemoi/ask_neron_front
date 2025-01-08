@@ -1,4 +1,4 @@
-import type { ChatPort, Message } from '../ports/ChatPort'
+import type { ChatPort, Message } from '../../core/ports/ChatPort'
 
 export class InMemoryChatAdapter implements ChatPort {
   async sendMessage(question: string, history: Message[]): Promise<Message> {

@@ -1,14 +1,26 @@
 <template>
   <div class="chatbot-container">
     <header class="chatbot-header">
-      <h1>Ask NERON</h1>
+      <div class="language-selector">
+        <img
+          v-for="lang in ['fr', 'en']"
+          :key="lang"
+          :src="langImages[lang]"
+          :alt="`Switch to ${lang}`"
+          @click="currentLocale = lang"
+          :class="{ active: currentLocale === lang }"
+          class="lang-selector"
+        />
+      </div>
+      <h1>{{ t('header.title') }}</h1>
       <p class="disclaimer">
-        NERON est basé sur un
-        <a href="https://fr.wikipedia.org/wiki/Grand_mod%C3%A8le_de_langage" class="disclaimer-link"
-          >grand modèle de language</a
+        {{ t('header.disclaimer') }}
+        <a
+          href="https://fr.wikipedia.org/wiki/Grand_mod%C3%A8le_de_langage"
+          class="disclaimer-link"
+          >{{ t('header.modelLink') }}</a
         >
-        et peut donc faire des erreurs. Vérifiez toujours les sources fournies et si besoin des
-        sources externes.
+        {{ t('header.disclaimerEnd') }}
       </p>
     </header>
 
@@ -30,7 +42,7 @@
           <p>{{ message.text }}</p>
           <div v-if="message.documents" class="documents">
             <div class="documents-header" @click="toggleDocuments(index)">
-              <span>Sources ({{ message.documents.length }})</span>
+              <span>{{ t('chat.sources') }} ({{ message.documents.length }})</span>
               <span class="toggle-icon" :class="{ 'is-open': openDocuments[index] }">▼</span>
             </div>
             <div v-show="openDocuments[index]" class="documents-content">
@@ -38,7 +50,7 @@
                 <h3>{{ doc.metadata.title }}</h3>
                 <p>{{ doc.content }}</p>
                 <a :href="doc.metadata.link" target="_blank" class="source-link">
-                  Source: {{ doc.metadata.source }}
+                  {{ t('chat.source') }}: {{ doc.metadata.source }}
                 </a>
               </div>
             </div>
@@ -47,7 +59,7 @@
       </div>
       <div v-if="isLoading" class="loading-message">
         <div class="loading-spinner"></div>
-        <span>NERON réfléchit...</span>
+        <span>{{ t('chat.thinking') }}</span>
       </div>
     </div>
 
@@ -55,27 +67,43 @@
       <input
         v-model="userInput"
         @keyup.enter="sendMessage"
-        placeholder="Posez votre question..."
+        :placeholder="t('chat.placeholder')"
         :disabled="isLoading"
       />
-      <button @click="sendMessage" :disabled="isLoading || !userInput.trim()">Envoyer</button>
+      <button @click="sendMessage" :disabled="isLoading || !userInput.trim()">
+        {{ t('chat.send') }}
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, nextTick } from 'vue'
-import { ChatService } from './services/ChatService'
-import { ApiChatAdapter } from './adapters/ApiChatAdapter'
-import type { Message } from './ports/ChatPort'
+import { ChatService } from '../core/services/ChatService'
+import { ApiChatAdapter } from '../infrastructure/adapters/ApiChatAdapter'
+import { TranslationService } from '../core/services/TranslationService'
+import { InMemoryTranslationAdapter } from '../infrastructure/adapters/InMemoryTranslationAdapter'
+import type { Message } from '../core/ports/ChatPort'
+import { translations } from '../translations'
+import langFr from '../assets/lang_fr.png'
+import langEn from '../assets/lang_en.png'
+
+const langImages: Record<string, string> = {
+  fr: langFr,
+  en: langEn,
+}
 
 const userInput = ref('')
 const messages = ref<Message[]>([])
 const isLoading = ref(false)
 const messagesContainer = ref<HTMLElement | null>(null)
 const openDocuments = ref<Record<number, boolean>>({})
+const currentLocale = ref('fr')
 
 const chatService = new ChatService(new ApiChatAdapter())
+const translationService = new TranslationService(new InMemoryTranslationAdapter(translations))
+
+const t = (key: string) => translationService.translate(key, currentLocale.value)
 
 const toggleDocuments = (index: number) => {
   openDocuments.value[index] = !openDocuments.value[index]
@@ -146,6 +174,34 @@ const sendMessage = async () => {
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
 }
 
+.language-selector {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lang-selector {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.lang-selector:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.lang-selector.active {
+  border-color: rgba(255, 66, 89, 1);
+  opacity: 1;
+}
+
 @media (min-height: 800px) {
   .chatbot-container {
     height: 90vh;
@@ -166,7 +222,7 @@ const sendMessage = async () => {
 }
 
 .disclaimer-link:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .chatbot-container::before,

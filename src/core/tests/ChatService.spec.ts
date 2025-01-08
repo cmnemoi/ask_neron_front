@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { ChatService } from '../services/ChatService'
 import type { Message, ChatPort } from '../ports/ChatPort'
-import { InMemoryChatAdapter } from '../adapters/InMemoryChatAdapter'
+import { InMemoryChatAdapter } from '../../infrastructure/adapters/InMemoryChatAdapter'
 
 describe('ChatService', () => {
   it('sends a message and receives a response', async () => {
