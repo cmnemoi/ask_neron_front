@@ -1,13 +1,19 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { ChatService } from '../services/ChatService'
 import type { Message, ChatPort } from '../ports/ChatPort'
 import { InMemoryChatAdapter } from '../../infrastructure/adapters/InMemoryChatAdapter'
 
 describe('ChatService', () => {
+  let chatPort: ChatPort
+  let chatService: ChatService
+
+  beforeEach(() => {
+    chatPort = new InMemoryChatAdapter()
+    chatService = new ChatService(chatPort)
+  })
+
   it('sends a message and receives a response', async () => {
     // Given
-    const chatPort: ChatPort = new InMemoryChatAdapter()
-    const chatService = new ChatService(chatPort)
     const question = 'What is NERON?'
 
     // When
@@ -21,8 +27,6 @@ describe('ChatService', () => {
 
   it('keeps track of chat history', async () => {
     // Given
-    const chatPort: ChatPort = new InMemoryChatAdapter()
-    const chatService = new ChatService(chatPort)
     const question = 'What is NERON?'
 
     // When

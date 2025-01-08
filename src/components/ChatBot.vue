@@ -12,6 +12,21 @@
           class="lang-selector"
         />
       </div>
+      <div class="github-links">
+        <a :href="repositories.api" target="_blank" class="github-link" title="API Repository">
+          <img :src="githubLogo" alt="GitHub" class="github-logo" />
+          <span>API</span>
+        </a>
+        <a
+          :href="repositories.frontend"
+          target="_blank"
+          class="github-link"
+          title="Frontend Repository"
+        >
+          <img :src="githubLogo" alt="GitHub" class="github-logo" />
+          <span>Frontend</span>
+        </a>
+      </div>
       <h1>{{ t('header.title') }}</h1>
       <p class="disclaimer">
         {{ t('header.disclaimer') }}
@@ -83,10 +98,13 @@ import { ChatService } from '../core/services/ChatService'
 import { ApiChatAdapter } from '../infrastructure/adapters/ApiChatAdapter'
 import { TranslationService } from '../core/services/TranslationService'
 import { InMemoryTranslationAdapter } from '../infrastructure/adapters/InMemoryTranslationAdapter'
+import { RepositoryService } from '../core/services/RepositoryService'
+import { InMemoryRepositoryAdapter } from '../infrastructure/adapters/InMemoryRepositoryAdapter'
 import type { Message } from '../core/ports/ChatPort'
 import { translations } from '../translations'
 import langFr from '../assets/lang_fr.png'
 import langEn from '../assets/lang_en.png'
+import githubLogo from '../assets/github_logo.svg'
 
 const langImages: Record<string, string> = {
   fr: langFr,
@@ -102,6 +120,8 @@ const currentLocale = ref('fr')
 
 const chatService = new ChatService(new ApiChatAdapter())
 const translationService = new TranslationService(new InMemoryTranslationAdapter(translations))
+const repositoryService = new RepositoryService(new InMemoryRepositoryAdapter())
+const repositories = repositoryService.getRepositories()
 
 const t = (key: string) => translationService.translate(key, currentLocale.value)
 
@@ -180,6 +200,36 @@ const sendMessage = async () => {
   right: 1rem;
   display: flex;
   gap: 0.5rem;
+}
+
+.github-links {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #c2f3fc;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.github-link:hover {
+  background: rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.github-logo {
+  width: 24px;
+  height: 24px;
 }
 
 .lang-selector {
