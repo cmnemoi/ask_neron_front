@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/cmnemoi/ask_neron_front/compare/v1.0.0...v1.0.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* Do not display user messages twice ([e78310d](https://github.com/cmnemoi/ask_neron_front/commit/e78310db2250d82c57f8867facfaf2e881d02b9f))
+
 ## 1.0.0 (2025-01-08)
 
 
