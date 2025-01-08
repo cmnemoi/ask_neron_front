@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/cmnemoi/ask_neron_front/compare/v1.0.1...v1.1.0) (2025-01-08)
+
+
+### Features
+
+* add footer with author information in ChatBot component ([ee0932f](https://github.com/cmnemoi/ask_neron_front/commit/ee0932f1265aed448836839dc7c5447b61a370c3))
+
 ## [1.0.1](https://github.com/cmnemoi/ask_neron_front/compare/v1.0.0...v1.0.1) (2025-01-08)
 
 
