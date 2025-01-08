@@ -63,17 +63,21 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, nextTick } from 'vue'
-import axios from 'axios'
+<script setup lang="ts">
+import { ref, nextTick } from 'vue'
+import { ChatService } from './services/ChatService'
+import { ApiChatAdapter } from './adapters/ApiChatAdapter'
+import type { Message } from './ports/ChatPort'
 
 const userInput = ref('')
-const messages = ref([])
+const messages = ref<Message[]>([])
 const isLoading = ref(false)
-const messagesContainer = ref(null)
-const openDocuments = ref({})
+const messagesContainer = ref<HTMLElement | null>(null)
+const openDocuments = ref<Record<number, boolean>>({})
 
-const toggleDocuments = (index) => {
+const chatService = new ChatService(new ApiChatAdapter())
+
+const toggleDocuments = (index: number) => {
   openDocuments.value[index] = !openDocuments.value[index]
 }
 
@@ -88,38 +92,16 @@ const sendMessage = async () => {
   if (!userInput.value.trim() || isLoading.value) return
 
   const question = userInput.value
-  messages.value.push({
-    type: 'user',
-    text: question,
-  })
-
   userInput.value = ''
   isLoading.value = true
   await scrollToBottom()
 
   try {
-    const response = await axios.post('http://46.101.95.138:3000/api/questions', {
-      question,
-      chatHistory: messages.value,
-    })
-
-    messages.value.push({
-      type: 'assistant',
-      text: response.data.answer,
-      documents: response.data.retrieved_documents,
-    })
-
-    // Set the new documents section to be closed by default
+    messages.value.push({ type: 'user', text: question })
+    await chatService.sendMessage(question, messages.value)
+    messages.value = chatService.getHistory()
     openDocuments.value[messages.value.length - 1] = false
-  } catch (error) {
-    const errorMessage = error.message.includes('Failed to fetch')
-      ? "Impossible de contacter NERON. Assurez-vous que l'API est en cours d'exécution sur http://localhost:3000"
-      : "Désolé, une erreur s'est produite. Veuillez réessayer plus tard."
-
-    messages.value.push({
-      type: 'bot',
-      text: errorMessage,
-    })
+  } catch (error: unknown) {
     console.error('Error:', error)
   } finally {
     isLoading.value = false
