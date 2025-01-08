@@ -13,28 +13,29 @@
         />
       </div>
       <div class="github-links">
-        <a :href="repositories.api" target="_blank" class="github-link" title="API Repository">
+        <a
+          :href="repositories.api"
+          target="_blank"
+          class="github-link"
+          :title="t('header.apiRepository')"
+        >
           <img :src="githubLogo" alt="GitHub" class="github-logo" />
-          <span>API</span>
+          <span>{{ t('repositories.api') }}</span>
         </a>
         <a
           :href="repositories.frontend"
           target="_blank"
           class="github-link"
-          title="Frontend Repository"
+          :title="t('header.frontendRepository')"
         >
           <img :src="githubLogo" alt="GitHub" class="github-logo" />
-          <span>Frontend</span>
+          <span>{{ t('repositories.frontend') }}</span>
         </a>
       </div>
       <h1>{{ t('header.title') }}</h1>
       <p class="disclaimer">
         {{ t('header.disclaimer') }}
-        <a
-          href="https://fr.wikipedia.org/wiki/Grand_mod%C3%A8le_de_langage"
-          class="disclaimer-link"
-          >{{ t('header.modelLink') }}</a
-        >
+        <a :href="t('header.wikipediaLink')" class="disclaimer-link">{{ t('header.modelLink') }}</a>
         {{ t('header.disclaimerEnd') }}
       </p>
     </header>
