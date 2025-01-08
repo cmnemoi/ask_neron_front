@@ -1,5 +1,6 @@
 # Ask Neron App
 
+[![Continuous Integration](https://github.com/cmnemoi/ask_neron_front/actions/workflows/ci.yml/badge.svg)](https://github.com/cmnemoi/ask_neron_front/actions/workflows/ci.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/49ec8f74-e14b-4a9d-ac0e-a3947e403301/deploy-status)](https://askneron.netlify.app/)
 
 A Vue.js frontend application for interacting with NERON, an LLM-based chatbot. Built with Vue 3, TypeScript, and following a basic Ports & Adapters architecture pattern.
