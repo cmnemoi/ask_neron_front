@@ -143,10 +143,11 @@ const sendMessage = async () => {
   const question = userInput.value
   userInput.value = ''
   isLoading.value = true
+
+  messages.value = [...messages.value, { type: 'user', text: question }]
   await scrollToBottom()
 
   try {
-    messages.value.push({ type: 'user', text: question })
     await chatService.sendMessage(question, messages.value)
     messages.value = chatService.getHistory()
     openDocuments.value[messages.value.length - 1] = false
