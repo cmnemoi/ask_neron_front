@@ -18,11 +18,6 @@ npm run dev
 
 The application will be available at `http://localhost:5173`
 
-## Features
-
-- Interactive chat interface with NERON (Retrieved-Augmented LLM)
-- Real-time message updates
-
 ## Development
 
 ### Prerequisites
@@ -59,8 +54,30 @@ npm run format
 
 ## Architecture
 
-The project follows a Ports & Adapters (Hexagonal) architecture:
+The project follows a Ports & Adapters (Hexagonal) architecture with clear separation of concerns:
 
-- `src/components/ports/` - Contains the interfaces defining the application boundaries
-- `src/components/adapters/` - Implements the interfaces for different contexts (API, In-Memory)
-- `src/components/services/` - Core business logic implementation
+### Core Domain (`src/core/`)
+
+- `ports/` - Contains the interfaces defining the application boundaries
+  - `ChatPort.ts` - Interface for chat operations
+  - `TranslationPort.ts` - Interface for translation operations
+- `services/` - Core business logic implementation
+  - `ChatService.ts` - Chat functionality implementation
+  - `TranslationService.ts` - Translation functionality implementation
+- `tests/` - Unit tests for core services
+
+### Infrastructure (`src/infrastructure/`)
+
+- `adapters/` - Implements the interfaces for different contexts
+  - `ApiChatAdapter.ts` - Production chat implementation using API
+  - `InMemoryChatAdapter.ts` - Test implementation for chat
+  - `InMemoryTranslationAdapter.ts` - Test implementation for translations
+
+### Presentation (`src/`)
+
+- `components/` - Vue components
+  - `ChatBot.vue` - Main chat interface component
+- `translations/` - Translation files
+  - `en.ts` - English translations
+  - `fr.ts` - French translations
+- `assets/` - Static assets (images, CSS)
