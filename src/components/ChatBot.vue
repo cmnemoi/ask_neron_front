@@ -4,7 +4,7 @@
       <h1>Ask NERON</h1>
       <p class="disclaimer">
         NERON est basé sur un
-        <a href="https://fr.wikipedia.org/wiki/Grand_mod%C3%A8le_de_langage"
+        <a href="https://fr.wikipedia.org/wiki/Grand_mod%C3%A8le_de_langage" class="disclaimer-link"
           >grand modèle de language</a
         >
         et peut donc faire des erreurs. Vérifiez toujours les sources fournies et si besoin des
@@ -98,41 +98,10 @@ const sendMessage = async () => {
   await scrollToBottom()
 
   try {
-    const response = await axios.post('http://localhost:3000/api/questions', {
+    const response = await axios.post('http://46.101.95.138:3000/api/questions', {
       question,
       chatHistory: messages.value,
     })
-
-    // Mock response for testing UI
-    // const response = {
-    //   data: {
-    //     answer:
-    //       'Une myco-alarme est un dispositif qui détecte certaines activités des Mush, notamment les poinçonnages. Elle ne détecte pas les extirpations.',
-    //     retrieved_documents: [
-    //       {
-    //         content:
-    //           "Q13 : Es-ce qu'une myco alarme se déclenche lorsqu'un mush poinçonne?\n\nR 13: Oui.",
-    //         metadata: {
-    //           link: 'https://twinoid-archives.netlify.app/fr/mush/entraide/21082281/1.html',
-    //           source: 'Peanutz',
-    //           title: 'Questions/ Reponses 17',
-    //         },
-    //       },
-    //       {
-    //         content:
-    //           "R179++ S'extirper ne fait pas sonner les Myco-alarmes.\n\nNon mais... sérieusement... Il faudra le dire combien de fois que les mycoalarmes ne détectent pas les extirpations ?",
-    //         metadata: {
-    //           link: 'https://twinoid-archives.netlify.app/fr/mush/entraide/45081422/1.html',
-    //           source: 'Peanutz',
-    //           title: 'Questions / Réponses n°78',
-    //         },
-    //       },
-    //     ],
-    //   },
-    // }
-
-    // // Simulate API delay
-    // await new Promise((resolve) => setTimeout(resolve, 2000))
 
     messages.value.push({
       type: 'assistant',
@@ -187,9 +156,9 @@ const sendMessage = async () => {
   height: 100vh;
   width: 100%;
   max-width: 800px;
-  background: linear-gradient(to bottom, #0a0a2a, #1a1a4a);
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom, #090a61, #122270);
+  color: #c2f3fc;
+  font-family: 'eKanit', 'Segoe UI', 'Lucida Grande', 'Trebuchet MS', Arial, sans-serif;
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
@@ -204,9 +173,18 @@ const sendMessage = async () => {
 
 .disclaimer {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: #a6eefb;
   margin: 0.5rem 0 0 0;
   font-style: italic;
+}
+
+.disclaimer-link {
+  color: #84e100;
+  text-decoration: none;
+}
+
+.disclaimer-link:hover {
+  text-decoration: underline;
 }
 
 .chatbot-container::before,
@@ -239,20 +217,20 @@ const sendMessage = async () => {
   background: rgba(0, 0, 0, 0.7);
   padding: 1rem;
   text-align: center;
-  border-bottom: 2px solid #ff3366;
+  border-bottom: 2px solid rgba(255, 66, 89, 1);
   position: relative;
   z-index: 1;
-  box-shadow: 0 0 20px rgba(255, 51, 102, 0.3);
+  box-shadow: 0 0 20px rgba(255, 66, 89, 0.3);
 }
 
 .chatbot-header h1 {
   margin: 0;
-  color: #ff3366;
+  color: rgba(255, 66, 89, 1);
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+  text-shadow: 0 0 10px rgba(255, 66, 89, 0.5);
   font-weight: 700;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Days-One', 'Segoe UI', 'Lucida Grande', 'Trebuchet MS', Arial, sans-serif;
 }
 
 .chat-messages {
@@ -305,8 +283,8 @@ const sendMessage = async () => {
 }
 
 .user-message .message-content {
-  background: rgba(255, 51, 102, 0.15);
-  border: 1px solid #ff3366;
+  background: rgba(255, 66, 89, 0.15);
+  border: 1px solid rgba(255, 66, 89, 1);
 }
 
 .bot-message {
@@ -314,8 +292,8 @@ const sendMessage = async () => {
 }
 
 .bot-message .message-content {
-  background: rgba(58, 58, 138, 0.15);
-  border: 1px solid #3a3a8a;
+  background: rgba(32, 129, 226, 0.15);
+  border: 1px solid #2081e2;
 }
 
 .documents {
@@ -357,18 +335,18 @@ const sendMessage = async () => {
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 1rem;
-  border: 1px solid rgba(58, 58, 138, 0.3);
+  border: 1px solid rgba(32, 129, 226, 0.3);
   transition: all 0.3s ease;
 }
 
 .document:hover {
-  border-color: #ff3366;
+  border-color: rgba(255, 66, 89, 1);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 51, 102, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 66, 89, 0.2);
 }
 
 .document h3 {
-  color: #ff3366;
+  color: rgba(255, 66, 89, 1);
   margin: 0 0 0.5rem 0;
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -378,17 +356,17 @@ const sendMessage = async () => {
 .source-link {
   display: inline-block;
   margin-top: 0.8rem;
-  color: #66ccff;
+  color: #84e100;
   text-decoration: none;
   font-size: 0.8rem;
   transition: all 0.3s ease;
   padding: 0.4rem 0.8rem;
-  background: rgba(102, 204, 255, 0.1);
+  background: rgba(132, 225, 0, 0.1);
   border-radius: 4px;
 }
 
 .source-link:hover {
-  background: rgba(102, 204, 255, 0.2);
+  background: rgba(132, 225, 0, 0.2);
   transform: translateY(-1px);
 }
 
@@ -405,24 +383,24 @@ const sendMessage = async () => {
 .chat-input input {
   flex: 1;
   padding: 1rem;
-  border: 1px solid #3a3a8a;
+  border: 1px solid #2081e2;
   border-radius: 4px;
-  background: rgba(10, 10, 42, 0.8);
-  color: #fff;
+  background: rgba(9, 10, 97, 0.8);
+  color: #c2f3fc;
   font-family: inherit;
   transition: all 0.3s ease;
 }
 
 .chat-input input:focus {
   outline: none;
-  border-color: #ff3366;
-  box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
-  background: rgba(10, 10, 42, 0.95);
+  border-color: rgba(255, 66, 89, 1);
+  box-shadow: 0 0 10px rgba(255, 66, 89, 0.3);
+  background: rgba(9, 10, 97, 0.95);
 }
 
 .chat-input button {
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #ff3366, #ff1a4f);
+  background: linear-gradient(135deg, rgba(255, 66, 89, 1), #cf1830);
   border: none;
   border-radius: 4px;
   color: #fff;
@@ -453,7 +431,7 @@ const sendMessage = async () => {
 
 .chat-input button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4);
+  box-shadow: 0 5px 15px rgba(255, 66, 89, 0.4);
 }
 
 .chat-input button:disabled {
@@ -468,8 +446,8 @@ const sendMessage = async () => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #66ccff;
-  background: rgba(102, 204, 255, 0.05);
+  color: #84e100;
+  background: rgba(132, 225, 0, 0.05);
   padding: 0.5rem 1rem;
   border-radius: 12px;
   margin: 0.5rem 0;
@@ -478,8 +456,8 @@ const sendMessage = async () => {
 .loading-spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(102, 204, 255, 0.2);
-  border-top-color: #66ccff;
+  border: 2px solid rgba(132, 225, 0, 0.2);
+  border-top-color: #84e100;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -521,12 +499,12 @@ const sendMessage = async () => {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3a3a8a;
+  background: #2081e2;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff3366;
+  background: rgba(255, 66, 89, 1);
 }
 
 @media (max-width: 800px) {
