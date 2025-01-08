@@ -4,7 +4,19 @@ import { InMemoryTranslationAdapter } from '../../infrastructure/adapters/InMemo
 
 describe('TranslationService', () => {
   let translationService: TranslationService
-  let defaultTranslations: Record<string, any>
+  let defaultTranslations: Record<
+    string,
+    {
+      header: {
+        title: string
+        disclaimer: string
+      }
+      chat: {
+        send: string
+        thinking: string
+      }
+    }
+  >
 
   beforeEach(() => {
     defaultTranslations = {

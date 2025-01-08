@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { ChatService } from '../services/ChatService'
-import type { Message, ChatPort } from '../ports/ChatPort'
+import type { ChatPort } from '../ports/ChatPort'
 import { InMemoryChatAdapter } from '../../infrastructure/adapters/InMemoryChatAdapter'
 
 describe('ChatService', () => {

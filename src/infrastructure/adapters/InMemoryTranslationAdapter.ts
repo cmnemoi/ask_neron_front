@@ -1,9 +1,9 @@
 import type { TranslationPort } from '../../core/ports/TranslationPort'
 
+type TranslationValue = string | { [key: string]: TranslationValue }
+
 type NestedTranslations = {
-  [locale: string]: {
-    [key: string]: string | { [key: string]: string | { [key: string]: string } }
-  }
+  [locale: string]: TranslationValue
 }
 
 export class InMemoryTranslationAdapter implements TranslationPort {
@@ -11,11 +11,11 @@ export class InMemoryTranslationAdapter implements TranslationPort {
 
   translate(key: string, locale: string): string {
     const keys = key.split('.')
-    let result: any = this.translations[locale]
+    let result: unknown = this.translations[locale]
 
     for (const k of keys) {
-      if (!result) break
-      result = result[k]
+      if (!result || typeof result !== 'object') break
+      result = (result as Record<string, unknown>)[k]
     }
 
     return typeof result === 'string' ? result : key
