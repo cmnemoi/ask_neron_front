@@ -9,8 +9,8 @@ describe('ChatBot', () => {
     // Given
     const wrapper = mount(ChatBot)
     const expectedQuestions = [
-      'Que détectent les myco-alarmes ?',
-      'Comment soigner une maladie ?',
+      'Une myco-alarme fonctionne-t-elle si elle est cachée ?',
+      'Les Aracks empêchent-ils le retour sur Sol?',
       'Un Mush peut-il tomber malade ?',
     ]
 
@@ -49,7 +49,7 @@ describe('ChatBot', () => {
   it('sends selected example question as message', async () => {
     // Given
     const wrapper = mount(ChatBot)
-    const expectedQuestion = 'Que détectent les myco-alarmes ?'
+    const expectedQuestion = 'Une myco-alarme fonctionne-t-elle si elle est cachée ?'
 
     // When
     const exampleQuestions = wrapper.findAll('.example-question')

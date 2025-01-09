@@ -17,8 +17,8 @@ export class InMemoryRepositoryAdapter implements RepositoryPort {
       questions: {
         en: ['What do myco-alarms detect?', 'How do you treat an illness?', 'Can a Mush get sick?'],
         fr: [
-          'Que détectent les myco-alarmes ?',
-          'Comment soigner une maladie ?',
+          'Une myco-alarme fonctionne-t-elle si elle est cachée ?',
+          'Les Aracks empêchent-ils le retour sur Sol?',
           'Un Mush peut-il tomber malade ?',
         ],
       },
