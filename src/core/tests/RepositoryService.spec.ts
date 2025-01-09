@@ -4,6 +4,28 @@ import type { RepositoryPort } from '../ports/RepositoryPort'
 import { InMemoryRepositoryAdapter } from '../../infrastructure/adapters/InMemoryRepositoryAdapter'
 
 describe('RepositoryService', () => {
+  it('provides example questions in English and French', () => {
+    // Given
+    const repositoryPort: RepositoryPort = new InMemoryRepositoryAdapter()
+    const repositoryService = new RepositoryService(repositoryPort)
+    const expectedQuestions = {
+      questions: {
+        en: ['What do myco-alarms detect?', 'How do you treat an illness?', 'Can a Mush get sick?'],
+        fr: [
+          'Que détectent les myco-alarmes ?',
+          'Comment traiter une maladie ?',
+          'Un Mush peut-il tomber malade ?',
+        ],
+      },
+    }
+
+    // When
+    const exampleQuestions = repositoryService.getExampleQuestions()
+
+    // Then
+    expect(exampleQuestions).toEqual(expectedQuestions)
+  })
+
   it('provides GitHub repository URLs', () => {
     // Given
     const repositoryPort: RepositoryPort = new InMemoryRepositoryAdapter()

@@ -79,16 +79,29 @@
       </div>
     </div>
 
-    <div class="chat-input">
-      <input
-        v-model="userInput"
-        @keyup.enter="sendMessage"
-        :placeholder="t('chat.placeholder')"
-        :disabled="isLoading"
-      />
-      <button @click="sendMessage" :disabled="isLoading || !userInput.trim()">
-        {{ t('chat.send') }}
-      </button>
+    <div class="chat-footer">
+      <div class="example-questions">
+        <div
+          v-for="question in exampleQuestions"
+          :key="question"
+          class="example-question"
+          @click="sendExampleQuestion(question)"
+        >
+          {{ question }}
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <input
+          v-model="userInput"
+          @keyup.enter="sendMessage"
+          :placeholder="t('chat.placeholder')"
+          :disabled="isLoading"
+        />
+        <button @click="sendMessage" :disabled="isLoading || !userInput.trim()">
+          {{ t('chat.send') }}
+        </button>
+      </div>
     </div>
 
     <footer class="chatbot-footer">
@@ -99,7 +112,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, computed } from 'vue'
 import { ChatService } from '../core/services/ChatService'
 import { ApiChatAdapter } from '../infrastructure/adapters/ApiChatAdapter'
 import { TranslationService } from '../core/services/TranslationService'
@@ -128,8 +141,16 @@ const chatService = new ChatService(new ApiChatAdapter())
 const translationService = new TranslationService(new InMemoryTranslationAdapter(translations))
 const repositoryService = new RepositoryService(new InMemoryRepositoryAdapter())
 const repositories = repositoryService.getRepositories()
+const exampleQuestions = computed(
+  () => repositoryService.getExampleQuestions().questions[currentLocale.value] || [],
+)
 
 const t = (key: string) => translationService.translate(key, currentLocale.value)
+
+const sendExampleQuestion = async (question: string) => {
+  userInput.value = question
+  await sendMessage()
+}
 
 const toggleDocuments = (index: number) => {
   openDocuments.value[index] = !openDocuments.value[index]
@@ -316,6 +337,48 @@ const sendMessage = async () => {
   position: relative;
   z-index: 1;
   box-shadow: 0 0 20px rgba(255, 66, 89, 0.3);
+}
+
+.chat-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.example-questions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.example-question {
+  background: rgba(32, 129, 226, 0.15);
+  border: 1px solid #2081e2;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  font-size: 0.85rem;
+}
+
+.example-question:hover {
+  background: rgba(255, 66, 89, 0.15);
+  border-color: rgba(255, 66, 89, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 66, 89, 0.2);
+}
+
+@media (max-width: 800px) {
+  .example-questions {
+    padding: 0.5rem;
+  }
+
+  .example-question {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
 }
 
 .chatbot-header h1 {
