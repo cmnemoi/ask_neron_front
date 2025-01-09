@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/cmnemoi/ask_neron_front/compare/v1.1.0...v1.2.0) (2025-01-09)
+
+
+### Features
+
+* add example questions to get started ([a649f3a](https://github.com/cmnemoi/ask_neron_front/commit/a649f3a3d29b9b169408f538e9e8726197301b5d))
+* Improve example questions to add more variety ([5287310](https://github.com/cmnemoi/ask_neron_front/commit/5287310de077adc39bcacfba697e6a7f95787285))
+
+
+### Bug Fixes
+
+* update a french example question ([16cd8db](https://github.com/cmnemoi/ask_neron_front/commit/16cd8db5d17f262d10a731c71bd6c0bca6f32612))
+
 ## [1.1.0](https://github.com/cmnemoi/ask_neron_front/compare/v1.0.1...v1.1.0) (2025-01-08)
 
 
