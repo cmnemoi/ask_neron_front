@@ -10,7 +10,7 @@ describe('ChatBot', () => {
     const wrapper = mount(ChatBot)
     const expectedQuestions = [
       'Que détectent les myco-alarmes ?',
-      'Comment traiter une maladie ?',
+      'Comment soigner une maladie ?',
       'Un Mush peut-il tomber malade ?',
     ]
 

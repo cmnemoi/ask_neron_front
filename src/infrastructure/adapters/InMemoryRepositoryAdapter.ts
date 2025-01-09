@@ -18,7 +18,7 @@ export class InMemoryRepositoryAdapter implements RepositoryPort {
         en: ['What do myco-alarms detect?', 'How do you treat an illness?', 'Can a Mush get sick?'],
         fr: [
           'Que détectent les myco-alarmes ?',
-          'Comment traiter une maladie ?',
+          'Comment soigner une maladie ?',
           'Un Mush peut-il tomber malade ?',
         ],
       },
