@@ -1,6 +1,5 @@
 import type { ChatPort, Message } from '../../core/ports/ChatPort'
 import axios from 'axios'
-
 export class ApiChatAdapter implements ChatPort {
   constructor(private apiUrl: string = 'https://askneron.com/api/questions') {}
 
@@ -8,7 +7,12 @@ export class ApiChatAdapter implements ChatPort {
     try {
       const response = await axios.post(this.apiUrl, {
         question,
-        chatHistory: history,
+        chat_history: history.map((message) => {
+          return {
+            role: message.type,
+            content: message.text,
+          }
+        }),
       })
 
       return {
