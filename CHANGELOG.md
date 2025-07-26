@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/cmnemoi/ask_neron_front/compare/v1.2.0...v1.2.1) (2025-07-26)
+
+
+### Bug Fixes
+
+* We correctly take account of chat history ([eda6494](https://github.com/cmnemoi/ask_neron_front/commit/eda6494bc0b67b5ebd7fe8fcdf6fa39bac2d4d27))
+
 ## [1.2.0](https://github.com/cmnemoi/ask_neron_front/compare/v1.1.0...v1.2.0) (2025-01-09)
 
 
