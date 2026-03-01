@@ -1,7 +1,7 @@
-import type { ChatPort, Message } from '../../core/ports/ChatPort'
 import axios from 'axios'
+import type { ChatPort, Message } from '../../core/ports/ChatPort'
 export class ApiChatAdapter implements ChatPort {
-  constructor(private apiUrl: string = 'https://askneron.com/api/questions') {}
+  constructor(private apiUrl: string = import.meta.env.VITE_API_URL) {}
 
   async sendMessage(question: string, history: Message[]): Promise<Message> {
     try {

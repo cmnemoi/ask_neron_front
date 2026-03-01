@@ -28,6 +28,10 @@ cd ask_neron_front
 
 # Install dependencies
 npm install
+
+# Configure environment variables
+cp .env.example .env
+# Edit .env and set VITE_API_URL to the URL of the Ask NERON API
 ```
 
 ## Usage
