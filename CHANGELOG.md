@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/cmnemoi/ask_neron_front/compare/v1.2.1...v1.3.0) (2026-03-01)
+
+
+### Features
+
+* add environment configuration and update API adapter to use VITE_API_URL ([02ea8aa](https://github.com/cmnemoi/ask_neron_front/commit/02ea8aaf4de4101f43731587be6afc91414931d1))
+
 ## [1.2.1](https://github.com/cmnemoi/ask_neron_front/compare/v1.2.0...v1.2.1) (2025-07-26)
 
 
